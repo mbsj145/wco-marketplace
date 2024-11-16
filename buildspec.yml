@@ -1,0 +1,23 @@
+version: 0.2
+
+phases:
+  install: 
+    commands:
+      - curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+      - sudo apt-get install -y nodejs
+      - pip install --upgrade pip
+      - pip install --upgrade awscli
+  pre_build:
+    commands:
+      - npm i --force
+      - npm i pm2 -g
+      - npm i nodemon -g
+  build:
+    commands:
+      - npm run build
+
+artifacts:
+  files:
+    - '**/*'
+  discard-paths: no
+  base-directory: build
